@@ -11,5 +11,6 @@ import lombok.Setter;
 @Setter
 public class Card {
     private String name;
-    private int value;
+    private int value = 0;
+    private String color;
 }
