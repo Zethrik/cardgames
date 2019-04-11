@@ -28,8 +28,10 @@ public class CardUtils {
         return deck;
     }
 
-    public Deck shuffleDeck(Deck deck) {
-        Collections.shuffle((List<?>) deck);
+    public static Deck shuffleDeck(Deck deck) {
+        List<Card> cards = deck.getCards();
+        Collections.shuffle(cards);
+        deck.setCards(cards);
         return deck;
     }
 }
