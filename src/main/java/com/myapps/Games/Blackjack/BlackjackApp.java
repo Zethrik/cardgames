@@ -31,7 +31,6 @@ public class BlackjackApp {
                     int credits = new Credits().getCredits();
                     System.out.println("Posiadasz " + credits + " kredytów");
                     new Utils().pause();
-                    startBlackjack();
                     break;
                 case 3:
                     break;
@@ -39,7 +38,7 @@ public class BlackjackApp {
                     System.out.println("Błędny wybór\n");
             }
 
-        } while (userSelection != 2);
+        } while (userSelection != 3);
     }
 
     private void playBlackjack() throws FileNotFoundException {
@@ -51,13 +50,25 @@ public class BlackjackApp {
         int maxRandom = 51;
         String userSelection = "";
 
-        while (score < 21 && !userSelection.equals("N") ) {
+        while (score < 21 && !userSelection.equals("N")) {
             Scanner scanner = new Scanner(System.in);
             int random = Utils.getRandomNumberInRange(0, maxRandom);
             maxRandom--;
             Card drawnCard = cards.get(random);
-            score += drawnCard.getValue();
+
             System.out.println("Nowa karta to " + drawnCard.getName() + " " + drawnCard.getColor());
+
+            if (drawnCard.getName().equals("As")) {
+                System.out.println("Wartość karty: 1 czy 11? ");
+                int userValue = new Utils().getUserInt();
+                if (userValue == 1 || userValue == 11) {
+                    score += userValue;
+                } else {
+                    score += drawnCard.getValue();
+                }
+            } else {
+                score += drawnCard.getValue();
+            }
             System.out.println("Punkty: " + score);
             cards.remove(random);
             if (score < 21) {
@@ -74,7 +85,7 @@ public class BlackjackApp {
             System.out.println("Cykor!");
             if (score > 15) {
                 int valueToAdd = score - 15;
-                System.out.println("Kredyty zwiększają się o" + valueToAdd);
+                System.out.println("Kredyty zwiększają się o " + valueToAdd);
                 new Credits().addCredits(valueToAdd);
             } else {
                 System.out.println("Tracisz 10 kredytów");
@@ -88,7 +99,7 @@ public class BlackjackApp {
             System.out.println("Jesteś zwycięzcą!");
             System.out.println("Otrzymujesz 25 kredytów");
             new Credits().addCredits(25);
-        } else  {
+        } else {
             System.out.println("Przegrywasz!");
             System.out.println("Tracisz 10 kredytów");
             new Credits().reduceCredits(10);
