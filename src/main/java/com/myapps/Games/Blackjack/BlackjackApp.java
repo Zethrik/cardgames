@@ -26,6 +26,11 @@ public class BlackjackApp {
             switch (userSelection) {
                 case 1:
                     playBlackjack();
+                    if (new Credits().getCredits() <= 0) {
+                        new Credits().gameOver();
+                        new Utils().pause();
+                        userSelection = 3;
+                    }
                     break;
                 case 2:
                     int credits = new Credits().getCredits();
