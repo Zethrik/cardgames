@@ -16,7 +16,7 @@ public class BlackjackApp {
         int userSelection;
         do {
             System.out.println("\n1) Nowa gra");
-            System.out.println("2) Menu główne");
+            System.out.println("2) Menu gier");
             System.out.print("\nTwój wybór: ");
             userSelection = new Utils().getUserInt();
             System.out.println();

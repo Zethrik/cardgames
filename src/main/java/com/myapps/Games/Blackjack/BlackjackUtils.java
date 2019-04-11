@@ -5,8 +5,8 @@ import com.myapps.cards.Deck;
 
 import java.util.List;
 
-public class BlackjackUtils {
-    public static void printBlackjackLogo() {
+class BlackjackUtils {
+    static void printBlackjackLogo() {
         System.out.println("______ _            _    _            _    \n" +
                 "| ___ \\ |          | |  (_)          | |   \n" +
                 "| |_/ / | __ _  ___| | ___  __ _  ___| | __\n" +
