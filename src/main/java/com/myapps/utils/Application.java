@@ -1,6 +1,6 @@
 package com.myapps.utils;
 
-import com.myapps.Games.Blackjack;
+import com.myapps.Games.Blackjack.BlackjackApp;
 
 public class Application {
 
@@ -13,7 +13,7 @@ public class Application {
             userSelection = new Utils().getUserInt();
             switch (userSelection) {
                 case 1:
-                    new Blackjack().startBlackjack();
+                    new BlackjackApp().startBlackjack();
                     break;
                 case 2:
                     break;
@@ -30,7 +30,7 @@ public class Application {
     }
 
     private void printMainMenu() {
-        System.out.println("\n1) Blackjack");
+        System.out.println("\n1) BlackjackApp");
         System.out.println("0) Wyjdź");
     }
 
