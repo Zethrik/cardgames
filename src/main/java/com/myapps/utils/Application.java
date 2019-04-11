@@ -2,9 +2,11 @@ package com.myapps.utils;
 
 import com.myapps.Games.Blackjack.BlackjackApp;
 
+import java.io.FileNotFoundException;
+
 public class Application {
 
-    public void start() {
+    public void start() throws FileNotFoundException {
         int userSelection;
         do {
             printGameLogo();
@@ -19,6 +21,11 @@ public class Application {
                     break;
                 case 3:
                     break;
+                case 9:
+                    int credits = new Credits().getCredits();
+                    System.out.println("Posiadasz " + credits + " kredytów");
+                    new Utils().pause();
+                    break;
                 case 0:
                     System.out.println("Do zobaczenia");
                     break;
@@ -30,7 +37,8 @@ public class Application {
     }
 
     private void printMainMenu() {
-        System.out.println("\n1) BlackjackApp");
+        System.out.println("\n1) Blackjack");
+        System.out.println("9) Liczba kredytów");
         System.out.println("0) Wyjdź");
     }
 
