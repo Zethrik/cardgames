@@ -1,6 +1,7 @@
 package com.myapps.utils;
 
 import com.myapps.Games.Blackjack.BlackjackApp;
+import com.myapps.Games.RPS.RPSApp;
 
 import java.io.FileNotFoundException;
 
@@ -21,10 +22,18 @@ public class Application {
                     break;
                 case 3:
                     break;
+                case 8:
+                    new Credits().setCredits(100);
+                    System.out.println("Kredyty zostały zresetowane do 100");
+                    new Utils().pause();
+                    break;
                 case 9:
                     int credits = new Credits().getCredits();
                     System.out.println("Posiadasz " + credits + " kredytów");
                     new Utils().pause();
+                    break;
+                case 666:
+                    new RPSApp().startRPS();
                     break;
                 case 0:
                     System.out.println("Do zobaczenia");
@@ -38,6 +47,7 @@ public class Application {
 
     private void printMainMenu() {
         System.out.println("\n1) Blackjack");
+        System.out.println("8) Reset kredytów");
         System.out.println("9) Liczba kredytów");
         System.out.println("0) Wyjdź");
     }

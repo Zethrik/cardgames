@@ -15,6 +15,10 @@ public class Utils {
         }
     }
 
+    public String getUserString() {
+        return scanner.nextLine();
+    }
+
     public void pause() {
         System.out.println("\nEnter, by kontynuować");
         scanner.nextLine();
