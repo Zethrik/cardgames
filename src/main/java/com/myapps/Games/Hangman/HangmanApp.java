@@ -38,7 +38,7 @@ public class HangmanApp {
         } while (userSelection != 3);
     }
 
-    private void playHangman() {
+    private void playHangman() throws FileNotFoundException {
         Scaffold scaffold = new Scaffold();
         scaffold.setHiddenWord(HangmanUtils.hiddenWordToGuess(scaffold.getWordToGuess()));
         int userSelection;
@@ -60,15 +60,16 @@ public class HangmanApp {
                 case 2:
                     boolean b = guessWord(scaffold);
                     if (b) {
-                        userSelection = 3;
-                }
+                        userSelection = 874;
+                    }
                     break;
                 case 3:
                     break;
                 default:
                     System.out.println("Błędny wybór\n");
             }
-        } while (scaffold.getMistakes() < 6 && userSelection != 3);
+        } while (scaffold.getMistakes() < 6 && userSelection != 3 && userSelection != 874);
+        hangmanResults(userSelection, scaffold.getShape());
     }
 
     private void guessLetter(Scaffold scaffold) {
@@ -122,6 +123,25 @@ public class HangmanApp {
             System.out.println("Niestety, " + userWord + " to nie hasło");
             new Utils().pause();
             return false;
+        }
+    }
+
+    private void hangmanResults(int userSelection, String loseShape) throws FileNotFoundException {
+        if (userSelection == 874) {
+            System.out.println("Otrzymujesz 25 kredytów");
+            new Credits().addCredits(25);
+            new Utils().pause();
+        } else if (userSelection == 3) {
+            System.out.println("Cykor!");
+            System.out.println("Tracisz 10 kredytów");
+            new Credits().reduceCredits(10);
+            new Utils().pause();
+        } else {
+            System.out.println(loseShape);
+            System.out.println("Przegrywasz!");
+            System.out.println("Tracisz 10 kredytów");
+            new Credits().reduceCredits(10);
+            new Utils().pause();
         }
     }
 }
