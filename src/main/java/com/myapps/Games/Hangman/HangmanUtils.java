@@ -27,7 +27,7 @@ public class HangmanUtils {
             String line = scanner.nextLine();
             words.add(line);
         }
-        int random = Utils.getRandomNumberInRange(0, words.size()-1);
+        int random = Utils.getRandomNumberInRange(0, words.size() - 1);
         return words.get(random);
     }
 
@@ -37,5 +37,37 @@ public class HangmanUtils {
             hiddenWord.append("*");
         }
         return hiddenWord.toString();
+    }
+
+    static String updateScaffoldShape(int mistakes) {
+        String newShape = "";
+        switch (mistakes) {
+            case 1:
+                newShape = "  ______\n |/     |\n |      @\n |      \n |      " +
+                        "\n |     \n |\n/ \\";
+                break;
+            case 2:
+                newShape = "  ______\n |/     |\n |      @\n |      |\n |      |" +
+                        "\n |     \n |\n/ \\";
+                break;
+            case 3:
+                newShape = "  ______\n |/     |\n |      @\n |     \\|\n |      |" +
+                        "\n |     \n |\n/ \\";
+                break;
+            case 4:
+                newShape = "  ______\n |/     |\n |      @\n |     \\|/\n |      |" +
+                        "\n |     \n |\n/ \\";
+                break;
+            case 5:
+            newShape = "  ______\n |/     |\n |      @\n |     \\|/\n |      |" +
+                    "\n |     /\n |\n/ \\";
+                break;
+            case 6:
+                newShape = "  ______\n |/     |\n |      @\n |     \\|/\n |      |" +
+                        "\n |     / \\\n |\n/ \\";
+                break;
+            default:
+        }
+        return newShape;
     }
 }

@@ -21,6 +21,7 @@ public class Application {
                     break;
                 case 2:
                     new HangmanApp().startHangman();
+                    break;
                 case 8:
                     new Credits().setCredits(100);
                     System.out.println("Kredyty zostały zresetowane do 100");
