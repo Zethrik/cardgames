@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Scaffold {
+class Scaffold {
     private String shape = "  ______\n |/     |\n |      \n |      \n |      " +
             "\n |     \n |\n/ \\";
     private String wordToGuess;
@@ -23,6 +23,6 @@ public class Scaffold {
         }
     }
     private String hiddenWord;
-    private String usedLetters = ".";
+    private String usedLetters = ":";
     private int mistakes = 0;
 }

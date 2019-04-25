@@ -46,6 +46,7 @@ public class HangmanApp {
         do {
             System.out.println(scaffold.getShape());
             System.out.println("\n" + scaffold.getHiddenWord());
+            System.out.println("Zużyte litery" + scaffold.getUsedLetters());
             System.out.println("\n1) Odgadnij literę");
             System.out.println("2) Odgadnij hasło");
             System.out.println("3) Poddaj się");
@@ -57,7 +58,10 @@ public class HangmanApp {
                     guessLetter(scaffold);
                     break;
                 case 2:
-                    guessWord();
+                    boolean b = guessWord(scaffold);
+                    if (b) {
+                        userSelection = 3;
+                }
                     break;
                 case 3:
                     break;
@@ -71,15 +75,14 @@ public class HangmanApp {
         String wordToGuess = scaffold.getWordToGuess();
         String usedLetters = scaffold.getUsedLetters();
         System.out.println("\nPodaj literę: ");
-        String letter = String.valueOf(new Utils().getUserString()).toLowerCase();
+        String letter = new Utils().getUserString().toLowerCase();
         if (letter.length() != 1) {
             System.out.println("To nie była litera");
             new Utils().pause();
         } else {
             if (wordToGuess.contains(letter) && !usedLetters.contains(letter)) {
-                usedLetters += letter;
+                usedLetters += " " + letter;
                 scaffold.setUsedLetters(usedLetters);
-
                 String hiddenWord = scaffold.getHiddenWord();
                 StringBuilder newHiddenWord = new StringBuilder();
                 for (int i = 0; i < wordToGuess.length(); i++) {
@@ -91,17 +94,34 @@ public class HangmanApp {
                 }
                 scaffold.setHiddenWord(newHiddenWord.toString());
                 System.out.println("Brawo. Słowo zawiera literę " + letter);
+                new Utils().pause();
             } else {
-                System.out.println("W słowie nie ma litery " + letter);
+                System.out.println("W słowie nie ma litery " + letter + " lub została już użyta");
+                new Utils().pause();
+                usedLetters += " " + letter;
+                scaffold.setUsedLetters(usedLetters);
                 int mistakes = scaffold.getMistakes();
                 mistakes++;
                 scaffold.setMistakes(mistakes);
                 scaffold.setShape(HangmanUtils.updateScaffoldShape(mistakes));
             }
         }
-
     }
 
-    private void guessWord() {
+    private boolean guessWord(Scaffold scaffold) {
+        System.out.println("\nPodaj hasło: ");
+        String userWord = new Utils().getUserString().toLowerCase();
+        if (userWord.equals(scaffold.getWordToGuess())) {
+            System.out.println("Wygrałeś! Hasło to: " + userWord);
+            return true;
+        } else {
+            int mistakes = scaffold.getMistakes();
+            mistakes++;
+            scaffold.setMistakes(mistakes);
+            scaffold.setShape(HangmanUtils.updateScaffoldShape(mistakes));
+            System.out.println("Niestety, " + userWord + " to nie hasło");
+            new Utils().pause();
+            return false;
+        }
     }
 }
