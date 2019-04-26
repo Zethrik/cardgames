@@ -56,6 +56,10 @@ public class HangmanApp {
             switch (userSelection) {
                 case 1:
                     guessLetter(scaffold);
+                    boolean b1 = checkIfComplete(scaffold);
+                    if (b1) {
+                        userSelection = 874;
+                    }
                     break;
                 case 2:
                     boolean b = guessWord(scaffold);
@@ -113,7 +117,7 @@ public class HangmanApp {
         System.out.println("\nPodaj hasło: ");
         String userWord = new Utils().getUserString().toLowerCase();
         if (userWord.equals(scaffold.getWordToGuess())) {
-            System.out.println("Wygrałeś! Hasło to: " + userWord);
+            System.out.println("Wygrywasz! Hasło to: " + userWord);
             return true;
         } else {
             int mistakes = scaffold.getMistakes();
@@ -122,6 +126,15 @@ public class HangmanApp {
             scaffold.setShape(HangmanUtils.updateScaffoldShape(mistakes));
             System.out.println("Niestety, " + userWord + " to nie hasło");
             new Utils().pause();
+            return false;
+        }
+    }
+
+    private boolean checkIfComplete(Scaffold scaffold) {
+        if (scaffold.getHiddenWord().equals(scaffold.getWordToGuess())) {
+            System.out.println("Wygrywasz! Hasło to: " + scaffold.getWordToGuess());
+            return true;
+        } else {
             return false;
         }
     }
